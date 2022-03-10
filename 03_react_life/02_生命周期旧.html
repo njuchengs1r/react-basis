@@ -58,7 +58,7 @@
                 return (
                     <div>
                         <h1>我是 Father 组件</h1>
-                        <Son />
+                        <Son {...this.state} />
                         <button onClick={this.handleUnmount}>卸载组件</button>
                         <button onClick={this.handleSetState}>setState</button>
                         <button onClick={this.handleForceUpdate}>forceUpdate</button>
