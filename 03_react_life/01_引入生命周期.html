@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+
+    </div>
+    <script type="text/babel">
+        class Life extends React.Component {
+            state = {
+                opacity: 1
+            }
+
+            handleUnmount = (selector) => {
+                return (e) => {
+                    ReactDOM.unmountComponentAtNode(document.querySelector(selector));
+                }
+            }
+
+            componentDidMount() {
+                console.log(this);
+                this.timer = setInterval(() => {
+                    const currentOpacity = this.state.opacity - 0.05;
+                    this.setState({
+                        opacity: currentOpacity <= 0 ? 1 : currentOpacity
+                    })
+                }, 100)
+            }
+
+            componentWillUnmount() {
+                console.log('组件将要卸载');
+                clearInterval(this.timer);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1 ref={e => this.titleEle = e} style={this.state}>React生命周期</h1>
+                        <button onClick={this.handleUnmount('#container')}>卸载组件</button>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<Life />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>

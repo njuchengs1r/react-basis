@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <style>
+        .ant-btn {
+            line-height: 1.499;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            border: 1px solid transparent;
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+            cursor: pointer;
+            -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            transition: all .3s cubic-bezier(.645, .045, .355, 1);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            height: 32px;
+            padding: 0 15px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: rgba(0, 0, 0, 0.65);
+            background-color: #fff;
+            border-color: #d9d9d9;
+        }
+
+        .ant-btn-primary {
+            color: #fff;
+            background-color: #1890ff;
+            border-color: #1890ff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        }
+
+        .ant-btn-red {
+            color: #fff;
+            background-color: #FF5A44;
+            border-color: #FF5A44;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        class Demo extends React.Component {
+            state = {
+                isHot: true,
+                temperature: 20
+            }
+
+            update = () => {
+                let { isHot, temperature } = this.state;
+                let temp = Math.floor(Math.random() * 40);
+                if (temp < 25) {
+                    isHot = false;
+                } else {
+                    isHot = true;
+                }
+                this.setState({
+                    isHot,
+                    temperature: temp
+                }, () => {
+                    console.log('Demo 更新完成');
+                })
+            }
+
+            render() {
+                const { isHot, temperature } = this.state;
+                return (
+                    <div>
+                        <h1>今天天气{isHot ? '炎热' : '凉爽'}</h1>
+                        <div style={{ backgroundColor: '#ccc', fontSize: '20px', margin: "10px 0" }}>今天温度是{temperature}度</div>
+                        <button className="ant-btn ant-btn-red" onClick={this.update}>点击更新天气</button>
+                    </div>
+                );
+            }
+        }
+
+        // 渲染组件
+        ReactDOM.render(<Demo address="wuhan" />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>

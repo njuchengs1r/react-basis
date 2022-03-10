@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <style>
+        div * {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        function InputText(props) {
+            return (
+                <form>
+                    <input type="text" placeholder="请输入文本" />
+                </form>
+            );
+        }
+
+        class Demo extends React.Component {
+            showDataLeft = () => {
+                const { inputLeft } = this.refs;
+                alert(inputLeft.value);
+            }
+
+            showDataRight = () => {
+                const { inputRight } = this.refs;
+                alert(inputRight.value);
+            }
+
+
+
+            render() {
+                console.log(this);
+                return (
+                    <div>
+                        <input ref="inputLeft" type="text" placeholder="请输入文本" />
+                        <button onClick={this.showDataLeft}>点击提示左侧文本</button>
+                        <input onBlur={this.showDataRight} ref="inputRight" type="text" placeholder="请输入文本" />
+                    </div >
+                );
+            }
+        }
+
+
+        // 渲染组件
+        ReactDOM.render(<Demo />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>

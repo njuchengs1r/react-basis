@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+    <!-- 核心库必须在拓展库之前引入 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- react 容器 -->
+    <div id="container"></div>
+    <div id="demo">真实元素</div>
+
+    <script type="text/babel">
+        // 创建虚拟DOM
+        const VDOM = <h1>Hello, React</h1>;
+        // 真实DOM
+        const TDOM = document.querySelector('#demo');
+        // 渲染虚拟DOM
+        ReactDOM.render(VDOM, document.querySelector('#container'));
+        debugger;
+    </script>
+</body>
+
+</html>

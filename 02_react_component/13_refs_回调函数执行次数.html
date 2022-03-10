@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <style>
+        div * {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        class Demo extends React.Component {
+
+            state = {
+                isHot: true
+            }
+
+            changeWeather = () => {
+                let { isHot } = this.state;
+                isHot = !isHot;
+                this.setState({ isHot })
+            }
+
+            bindFunc = (e) => {
+                this.bindEle = e;
+                console.log('bind', e);
+            }
+
+
+
+
+            render() {
+                console.log(this);
+                const { isHot } = this.state;
+                return (
+                    <div>
+                        <h1>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
+                        <div ref={e => { this.inlineEle = e; console.log('inline', e) }}>内联的函数</div>
+                        <div ref={this.bindFunc}>实例绑定的函数</div>
+                        <button onClick={this.changeWeather}>点击切换天气</button>
+                    </div >
+                );
+            }
+        }
+        // 渲染组件
+        ReactDOM.render(<Demo />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>

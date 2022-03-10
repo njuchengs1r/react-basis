@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <style>
+        button {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+    </div>
+    <script type="text/babel">
+        class Father extends React.Component {
+            constructor(props) {
+                super(props);
+                console.log('Father ===> constructor');
+            }
+
+            state = {
+                firstName: 'gao',
+                address: 'wuhan'
+            }
+
+            handleUnmount = () => {
+                ReactDOM.unmountComponentAtNode(document.querySelector('#container'));
+            }
+
+            handleSetState = () => {
+                this.setState({
+                    firstName: 'cen',
+                    address: 'hangzhou'
+                })
+            }
+
+            handleForceUpdate = () => {
+                this.forceUpdate();
+
+            }
+
+            componentWillMount() {
+                console.log('Father ===> componentWillMount');
+            }
+
+            render() {
+                console.log('Father ===> render');
+                return (
+                    <div>
+                        <h1>我是 Father 组件</h1>
+                        <Son />
+                        <button onClick={this.handleUnmount}>卸载组件</button>
+                        <button onClick={this.handleSetState}>setState</button>
+                        <button onClick={this.handleForceUpdate}>forceUpdate</button>
+                    </div>
+                );
+            }
+
+            componentDidMount() {
+                console.log('Father ===> componentDidMount');
+            }
+
+            componentWillUnmount() {
+                console.log('Father ===> componentWillUnmount');
+            }
+
+            shouldComponentUpdate() {
+                console.log('Father ===> shouldComponentUpdate');
+                return true;
+            }
+
+            componentWillUpdate() {
+                console.log('Father ===> componentWllUpdate');
+            }
+
+            componentDidUpdate() {
+                console.log('Father ===> componentDidUpdate');
+            }
+        }
+
+        class Son extends React.Component {
+            constructor(props) {
+                super(props);
+                console.log('Son ===> constructor');
+            }
+
+            componentWillMount() {
+                console.log('Son ===> componentWillMount');
+            }
+
+            render() {
+                console.log('Son ===> render');
+                return (
+                    <h1>我是 Son 组件, 我姓{this.props.firstName}, 我住在{this.props.address}</h1>
+                );
+            }
+
+            componentDidMount() {
+                console.log('Son ===> componentDidMount');
+            }
+
+            componentWillUnmount() {
+                console.log('Son ===> componentWillUnmount');
+            }
+
+            componentWillReceiveProps() {
+                console.log('Son ===> componentWillReceiveProps');
+            }
+
+            shouldComponentUpdate() {
+                console.log('Son ===> shouldComponentUpdate');
+                return true;
+            }
+
+            componentWillUpdate() {
+                console.log('Son ===> componentWillUpdate');
+            }
+
+            componentDidUpdate() {
+                console.log('Son ===> componentDidUpdate');
+            }
+        }
+
+        ReactDOM.render(<Father />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>

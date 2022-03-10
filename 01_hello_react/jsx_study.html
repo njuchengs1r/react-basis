@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX 语法</title>
+    <!-- 核心库必须在拓展库之前引入 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- react 容器 -->
+    <div id="container"></div>
+
+    <script type="text/babel">
+        // 假数据
+        const data = {
+            title: "前端js框架列表",
+            frames: ['Angular', 'React', 'Vue']
+        }
+        // 创建虚拟DOM
+        const VDOM = (
+            <div>
+                <h2 style={{ color: 'red', fontSize: '24px', backgroundColor: '#eee' }}>{data.title}</h2>
+                <ul>
+                    {
+                        data.frames.map((item, index) => {
+                            return (<li key={index}>{item}</li>);
+                        })
+                    }
+                </ul>
+            </div>
+        );
+        // 真实DOM
+        const TDOM = document.querySelector('#demo');
+        // 渲染虚拟DOM
+        ReactDOM.render(VDOM, document.querySelector('#container'));
+        // debugger;
+
+        /*
+            JSX 语法规范总结:
+            1. 不能包含多个根标签
+            2. 标签转化规则
+                （1）小写字母开头的标签元素会转化成html对应的元素标签，该元素标签不存在则会报警告或者报错
+                （2）大写字母的标签会被解析为React对应的组件，组件不存在则报错
+            3. 标签内以{}包含的是js表达式（表达式是有执行结果的js语句）
+            4. class 要改成 className
+            5. 行内样式 要以驼峰形式的 key-value 形式书写
+            6. {}中的数组形式的js表达式会直接拼接
+
+        */
+    </script>
+</body>
+
+</html>

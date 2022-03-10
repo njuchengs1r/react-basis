@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div id="container2"></div>
+    <div id="container3"></div>
+    <script type="text/babel">
+        const datas = [
+            { id: 0, name: 'Tom', sex: '女', age: 18 },
+            { id: 1, name: 'JACK', sex: '男', age: 17 },
+            { id: 2, name: 'Alan', }
+        ];
+
+        // 省略了 constructor 构造器函数 相当于
+        // constructor(...arguments) {
+        //       super(...arguments);
+        //   }
+
+        class Person extends React.Component {
+
+
+
+            render() {
+                const { id, name, sex, age } = this.props;
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age + 0}</li>
+                    </ul>
+                );
+            }
+
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                sex: PropTypes.string,
+                age: PropTypes.number
+            }
+
+            static defaultProps = {
+                sex: '未知',
+                age: 18
+            }
+        }
+
+        // 渲染组件
+        ReactDOM.render(<Person {...datas[0]} />, document.querySelector('#container'));
+        ReactDOM.render(<Person {...datas[1]} />, document.querySelector('#container2'));
+        ReactDOM.render(<Person {...datas[2]} />, document.querySelector('#container3'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <style>
+        div * {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        class Demo extends React.Component {
+
+            state = {
+                username: '',
+                password: ''
+            }
+
+            updateUsername = (e) => {
+                this.setState({
+                    username: e.target.value
+                })
+            }
+
+            updatePassword = (e) => {
+                this.setState({
+                    password: e.target.value
+                })
+            }
+
+            mySubmit = (e) => {
+                e.preventDefault();
+                alert(JSON.stringify(this.state, null, 2));
+            }
+
+
+            render() {
+                const { username, password } = this.state;
+
+                return (
+                    <form onSubmit={this.mySubmit}>
+                        <label>
+                            账号: <input type="text" value={username} placeholder="请输入账号" onChange={this.updateUsername} />
+                        </label><br /><br />
+                        <label>
+                            密码: <input type="text" value={password} placeholder="请输入密码" onChange={this.updatePassword} />
+                        </label><br /><br />
+                        <button type="submit">提交</button>
+                    </form>
+                );
+            }
+        }
+        // 渲染组件
+        ReactDOM.render(<Demo />, document.querySelector('#container'));
+    </script>
+</body>
+
+</html>
